@@ -56,6 +56,11 @@ export const getAllBooksFiltered = (filters?: {
     return structuredClone(filteredBooks);
 };
 
+export const getBookById = (id: string): Book | null => {
+    const book = books.find((b) => b.id === id);
+    return book ? structuredClone(book) : null;
+};
+
 /**
  * Adds a new book to the library system.
  *
