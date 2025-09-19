@@ -131,3 +131,28 @@ export const getRecommendations = (req: Request, res: Response): void => {
         });
     }
 };
+
+export const getBookById = (req: Request, res: Response): void => {
+    const { id } = req.params;
+
+    if (!id || id.trim() === "") {
+        res.status(HTTP_STATUS.BAD_REQUEST).json({
+            message: "Book ID is required",
+        });
+        return;
+    }
+
+    const book = bookService.getBookById(id);
+
+    if (!book) {
+        res.status(HTTP_STATUS.NOT_FOUND).json({
+            message: "Book not found",
+        });
+        return;
+    }
+
+    res.status(HTTP_STATUS.OK).json({
+        message: "Book retrieved",
+        data: book,
+    });
+};
